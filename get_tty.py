@@ -42,5 +42,24 @@ def get_tty(serial_number, sub_dev=0):
 
     return tty
 
+def get_sn(tty=None):
+    serial_numbers = []
+    for d in os.listdir(base_path):
+        try:
+            dev_path = os.path.join(base_path, d)
+            sn_file = open(os.path.join(dev_path, "serial"), "r")
+            sn = sn_file.readline().strip()
+            sn_file.close()
+            serial_numbers.append(sn)
+        except OSError:
+            continue
+
+    ttys = [get_tty(s) for s in serial_numbers]
+    
+    return [{serial_numbers[i]: ttys[i]} \
+            for i in range(0, len(ttys)) if ttys[i] != None]
+
+
 if __name__ == "__main__":
     print(get_tty("A400D61R"))
+    print(get_sn())
