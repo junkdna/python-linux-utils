@@ -1,0 +1,15 @@
+*~
+*#
+.#*
+GPATH
+GRTAGS
+GTAGS
+build
+firmware
+.gdb_history
+local.h
+screenlog.*
+*.swp
+tags
+cscope.*
+git_rev.h
